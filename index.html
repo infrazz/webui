@@ -1,0 +1,964 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Infrazz | Build Infrastructure That Moves Fast</title>
+    <meta
+      name="description"
+      content="Infrazz helps teams ship resilient infrastructure, secure delivery pipelines, and high-performance web platforms.">
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6efe3;
+        --bg-deep: #1b2a41;
+        --surface: rgba(255, 250, 243, 0.76);
+        --surface-strong: #fffaf3;
+        --text: #1c2b33;
+        --muted: #5d6d76;
+        --line: rgba(28, 43, 51, 0.12);
+        --line-strong: rgba(28, 43, 51, 0.2);
+        --accent: #d86f2d;
+        --accent-deep: #9e4515;
+        --accent-soft: #f6ddc4;
+        --navy-soft: #d8e3f1;
+        --shadow: 0 30px 80px rgba(20, 32, 54, 0.12);
+        --max: 1180px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", "Trebuchet MS", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(216, 111, 45, 0.16), transparent 28%),
+          radial-gradient(circle at 85% 15%, rgba(27, 42, 65, 0.08), transparent 24%),
+          linear-gradient(180deg, #fcf7f0 0%, #f4ecdf 44%, #f8f3ea 100%);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      .page-shell {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .page-shell::before,
+      .page-shell::after {
+        content: "";
+        position: absolute;
+        border-radius: 999px;
+        pointer-events: none;
+        filter: blur(8px);
+      }
+
+      .page-shell::before {
+        top: -140px;
+        right: -120px;
+        width: 340px;
+        height: 340px;
+        background: rgba(216, 111, 45, 0.16);
+      }
+
+      .page-shell::after {
+        top: 440px;
+        left: -110px;
+        width: 260px;
+        height: 260px;
+        background: rgba(86, 118, 161, 0.12);
+      }
+
+      .container {
+        width: min(var(--max), calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(14px);
+        background: rgba(252, 247, 240, 0.74);
+        border-bottom: 1px solid rgba(28, 43, 51, 0.06);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        min-height: 78px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+      }
+
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        color: #fff;
+        background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24);
+      }
+
+      .brand-mark::before {
+        content: "";
+        width: 18px;
+        height: 18px;
+        border-radius: 6px;
+        border: 2px solid currentColor;
+        transform: rotate(45deg);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        color: var(--muted);
+        font-size: 0.96rem;
+      }
+
+      .nav-links a:hover,
+      .footer-links a:hover {
+        color: var(--accent-deep);
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        min-height: 48px;
+        padding: 0 20px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        font-weight: 700;
+        transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+      }
+
+      .button:hover {
+        transform: translateY(-1px);
+      }
+
+      .button-primary {
+        color: #fff;
+        background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+        box-shadow: 0 18px 34px rgba(158, 69, 21, 0.25);
+      }
+
+      .button-secondary {
+        border-color: var(--line-strong);
+        background: rgba(255, 255, 255, 0.55);
+      }
+
+      .hero {
+        padding: 56px 0 36px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+        gap: 36px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(216, 111, 45, 0.11);
+        color: var(--accent-deep);
+        font-size: 0.86rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .hero h1 {
+        margin: 20px 0 18px;
+        max-width: 11ch;
+        font-size: clamp(3.25rem, 8vw, 6.2rem);
+        line-height: 0.93;
+        letter-spacing: -0.05em;
+      }
+
+      .hero-copy {
+        max-width: 640px;
+        font-size: 1.14rem;
+        line-height: 1.75;
+        color: var(--muted);
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .hero-note {
+        margin-top: 22px;
+        color: var(--muted);
+        font-size: 0.96rem;
+      }
+
+      .hero-visual {
+        position: relative;
+        padding: 24px;
+        border-radius: 30px;
+        background:
+          linear-gradient(160deg, rgba(255, 255, 255, 0.8), rgba(255, 248, 240, 0.46)),
+          linear-gradient(135deg, rgba(216, 111, 45, 0.16), rgba(86, 118, 161, 0.08));
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        box-shadow: var(--shadow);
+      }
+
+      .hero-visual::before {
+        content: "";
+        position: absolute;
+        inset: 18px;
+        border-radius: 24px;
+        border: 1px solid rgba(28, 43, 51, 0.08);
+        pointer-events: none;
+      }
+
+      .network-panel {
+        position: relative;
+        min-height: 500px;
+        padding: 28px;
+        border-radius: 24px;
+        background:
+          radial-gradient(circle at 30% 20%, rgba(216, 111, 45, 0.18), transparent 22%),
+          radial-gradient(circle at 75% 35%, rgba(86, 118, 161, 0.22), transparent 20%),
+          linear-gradient(180deg, #fffaf4 0%, #f6efe3 100%);
+        overflow: hidden;
+      }
+
+      .grid-lines {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(28, 43, 51, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(28, 43, 51, 0.045) 1px, transparent 1px);
+        background-size: 40px 40px;
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9), transparent 95%);
+      }
+
+      .floating-card,
+      .mini-card,
+      .node {
+        position: absolute;
+        border-radius: 20px;
+      }
+
+      .floating-card {
+        width: 230px;
+        padding: 18px;
+        background: rgba(255, 255, 255, 0.82);
+        border: 1px solid rgba(28, 43, 51, 0.08);
+        box-shadow: 0 24px 50px rgba(20, 32, 54, 0.08);
+      }
+
+      .floating-card strong,
+      .mini-card strong {
+        display: block;
+        font-size: 1rem;
+      }
+
+      .floating-card span,
+      .mini-card span {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        line-height: 1.55;
+        font-size: 0.95rem;
+      }
+
+      .mini-card {
+        padding: 16px;
+        background: rgba(255, 250, 243, 0.88);
+        border: 1px solid rgba(28, 43, 51, 0.08);
+        box-shadow: 0 18px 30px rgba(20, 32, 54, 0.06);
+      }
+
+      .node {
+        width: 16px;
+        height: 16px;
+        background: linear-gradient(135deg, var(--accent) 0%, #ffb36c 100%);
+        border: 3px solid #fff;
+        box-shadow: 0 0 0 8px rgba(216, 111, 45, 0.1);
+      }
+
+      .line {
+        position: absolute;
+        height: 2px;
+        transform-origin: left center;
+        background: linear-gradient(90deg, rgba(216, 111, 45, 0.5), rgba(86, 118, 161, 0.34));
+      }
+
+      .card-a { top: 54px; left: 24px; }
+      .card-b { top: 204px; right: 22px; width: 210px; }
+      .card-c { bottom: 40px; left: 54px; width: 250px; }
+      .mini-a { top: 110px; right: 86px; width: 128px; }
+      .mini-b { bottom: 118px; right: 96px; width: 144px; }
+
+      .node-1 { top: 140px; left: 284px; }
+      .node-2 { top: 202px; left: 178px; }
+      .node-3 { top: 276px; left: 332px; }
+      .node-4 { top: 124px; right: 184px; }
+      .node-5 { bottom: 118px; right: 154px; }
+
+      .line-1 { top: 146px; left: 197px; width: 104px; transform: rotate(-8deg); }
+      .line-2 { top: 212px; left: 186px; width: 147px; transform: rotate(25deg); }
+      .line-3 { top: 135px; left: 301px; width: 170px; transform: rotate(-7deg); }
+      .line-4 { top: 284px; left: 344px; width: 216px; transform: rotate(28deg); }
+
+      .signal {
+        position: absolute;
+        top: 30px;
+        right: 32px;
+        padding: 12px 16px;
+        border-radius: 16px;
+        background: rgba(27, 42, 65, 0.92);
+        color: #edf3fb;
+        box-shadow: 0 20px 36px rgba(20, 32, 54, 0.2);
+      }
+
+      .signal strong {
+        display: block;
+        font-size: 1.35rem;
+      }
+
+      .signal span {
+        font-size: 0.88rem;
+        color: rgba(237, 243, 251, 0.75);
+      }
+
+      .section {
+        padding: 42px 0;
+      }
+
+      .logo-strip,
+      .stats,
+      .feature-grid,
+      .pillars,
+      .flow-grid,
+      .testimonial-grid,
+      .footer-grid {
+        display: grid;
+        gap: 18px;
+      }
+
+      .logo-strip {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .logo-chip,
+      .stat-card,
+      .feature-card,
+      .pillar,
+      .flow-card,
+      .quote-card,
+      .cta-panel {
+        border: 1px solid var(--line);
+        background: rgba(255, 251, 246, 0.8);
+        box-shadow: var(--shadow);
+      }
+
+      .logo-chip {
+        padding: 18px 20px;
+        border-radius: 18px;
+        text-align: center;
+        color: var(--muted);
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .section-heading {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 24px;
+      }
+
+      .section-heading h2,
+      .cta-copy h2 {
+        margin: 0;
+        max-width: 12ch;
+        font-size: clamp(2rem, 4vw, 3.4rem);
+        line-height: 0.98;
+        letter-spacing: -0.04em;
+      }
+
+      .section-heading p,
+      .cta-copy p {
+        margin: 0;
+        max-width: 560px;
+        color: var(--muted);
+        line-height: 1.75;
+      }
+
+      .stats {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .stat-card {
+        padding: 26px;
+        border-radius: 24px;
+      }
+
+      .stat-card strong {
+        display: block;
+        font-size: clamp(1.8rem, 4vw, 3rem);
+        letter-spacing: -0.05em;
+      }
+
+      .stat-card span {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .feature-card,
+      .pillar,
+      .flow-card,
+      .quote-card {
+        padding: 28px;
+        border-radius: 24px;
+      }
+
+      .feature-icon,
+      .pillar-icon {
+        width: 48px;
+        height: 48px;
+        display: grid;
+        place-items: center;
+        border-radius: 16px;
+        margin-bottom: 18px;
+        color: var(--accent-deep);
+        background: linear-gradient(135deg, rgba(216, 111, 45, 0.18), rgba(216, 111, 45, 0.06));
+      }
+
+      .feature-card h3,
+      .pillar h3,
+      .flow-card h3 {
+        margin: 0 0 12px;
+        font-size: 1.28rem;
+      }
+
+      .feature-card p,
+      .pillar p,
+      .flow-card p,
+      .quote-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.75;
+      }
+
+      .pillars {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .pillar {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .pillar::after {
+        content: "";
+        position: absolute;
+        inset: auto -35px -35px auto;
+        width: 140px;
+        height: 140px;
+        border-radius: 999px;
+        background: rgba(216, 111, 45, 0.08);
+      }
+
+      .flow-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .flow-card {
+        position: relative;
+        min-height: 240px;
+      }
+
+      .step {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        margin-bottom: 18px;
+        border-radius: 999px;
+        font-weight: 800;
+        color: var(--accent-deep);
+        background: var(--accent-soft);
+      }
+
+      .quote-card {
+        background: linear-gradient(180deg, rgba(27, 42, 65, 0.96), rgba(34, 56, 86, 0.94));
+        color: #eef4fb;
+      }
+
+      .quote-card p {
+        color: rgba(238, 244, 251, 0.82);
+      }
+
+      .quote-mark {
+        font-size: 3rem;
+        line-height: 1;
+        color: rgba(255, 255, 255, 0.24);
+      }
+
+      .quote-source {
+        margin-top: 18px;
+        font-size: 0.95rem;
+        color: rgba(238, 244, 251, 0.66);
+      }
+
+      .cta {
+        padding: 48px 0 74px;
+      }
+
+      .cta-panel {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 24px;
+        align-items: center;
+        padding: 36px;
+        border-radius: 30px;
+        background:
+          radial-gradient(circle at top left, rgba(216, 111, 45, 0.16), transparent 30%),
+          linear-gradient(135deg, #fffaf3 0%, #f8f1e6 100%);
+      }
+
+      .footer {
+        padding: 22px 0 46px;
+        border-top: 1px solid rgba(28, 43, 51, 0.08);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr auto;
+        align-items: center;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        color: var(--muted);
+      }
+
+      @media (max-width: 1080px) {
+        .hero-grid,
+        .cta-panel,
+        .section-heading,
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .feature-grid,
+        .pillars,
+        .stats,
+        .logo-strip,
+        .flow-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .nav-links {
+          display: none;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .container {
+          width: min(var(--max), calc(100% - 24px));
+        }
+
+        .site-header {
+          position: static;
+        }
+
+        .hero {
+          padding-top: 26px;
+        }
+
+        .hero h1,
+        .section-heading h2,
+        .cta-copy h2 {
+          max-width: none;
+        }
+
+        .feature-grid,
+        .pillars,
+        .stats,
+        .logo-strip,
+        .flow-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .nav {
+          min-height: 70px;
+        }
+
+        .nav-actions .button-secondary {
+          display: none;
+        }
+
+        .hero-visual {
+          padding: 14px;
+        }
+
+        .network-panel {
+          min-height: 540px;
+          padding: 18px;
+        }
+
+        .card-a { top: 18px; left: 18px; width: calc(100% - 36px); }
+        .card-b { top: 196px; right: 18px; left: 18px; width: auto; }
+        .card-c { bottom: 18px; left: 18px; right: 18px; width: auto; }
+        .mini-a,
+        .mini-b,
+        .line-1,
+        .line-2,
+        .line-3,
+        .line-4,
+        .signal {
+          display: none;
+        }
+
+        .node-1 { top: 166px; left: 44px; }
+        .node-2 { top: 240px; right: 70px; left: auto; }
+        .node-3 { top: 328px; left: 120px; }
+        .node-4 { top: 400px; right: 56px; }
+        .node-5 { bottom: 122px; right: 112px; }
+
+        .cta-panel,
+        .feature-card,
+        .pillar,
+        .flow-card,
+        .quote-card,
+        .stat-card {
+          padding: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <div class="container nav">
+          <a class="brand" href="#top" aria-label="Infrazz home">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span>INFRAZZ</span>
+          </a>
+          <nav class="nav-links" aria-label="Primary">
+            <a href="#platform">Platform</a>
+            <a href="#products">Products</a>
+            <a href="#workflow">Workflow</a>
+            <a href="#proof">Proof</a>
+          </nav>
+          <div class="nav-actions">
+            <a class="button button-secondary" href="#proof">See the stack</a>
+            <a class="button button-primary" href="#contact">Start building</a>
+          </div>
+        </div>
+      </header>
+
+      <main id="top">
+        <section class="hero">
+          <div class="container hero-grid">
+            <div>
+              <span class="eyebrow">Platform for modern infrastructure</span>
+              <h1>Build faster. Ship safer. Scale with confidence.</h1>
+              <p class="hero-copy">
+                Infrazz brings web delivery, deployment workflows, and operational
+                clarity into one clean layer so teams can move from idea to
+                production without turning infrastructure into a bottleneck.
+              </p>
+              <div class="hero-actions">
+                <a class="button button-primary" href="#contact">Launch with Infrazz</a>
+                <a class="button button-secondary" href="#products">Explore the platform</a>
+              </div>
+              <p class="hero-note">
+                Designed for fast-moving teams shipping websites, internal tools,
+                product surfaces, and infrastructure-heavy projects. Contact us at
+                <a href="mailto:hello@infrazz.com">hello@infrazz.com</a>.
+              </p>
+            </div>
+
+            <div class="hero-visual" aria-hidden="true">
+              <div class="network-panel">
+                <div class="grid-lines"></div>
+                <div class="signal">
+                  <strong>99.98%</strong>
+                  <span>delivery health across services</span>
+                </div>
+                <div class="floating-card card-a">
+                  <strong>Global delivery layer</strong>
+                  <span>Cache, route, and publish changes without slowing down your release flow.</span>
+                </div>
+                <div class="mini-card mini-a">
+                  <strong>Deploy</strong>
+                  <span>main -> live in minutes</span>
+                </div>
+                <div class="floating-card card-b">
+                  <strong>Security by default</strong>
+                  <span>Domain setup, HTTPS, guarded workflows, and safer publishing paths.</span>
+                </div>
+                <div class="mini-card mini-b">
+                  <strong>Observe</strong>
+                  <span>status, trends, bottlenecks</span>
+                </div>
+                <div class="floating-card card-c">
+                  <strong>Operational clarity</strong>
+                  <span>Readable infrastructure, fewer manual steps, and cleaner handoffs across teams.</span>
+                </div>
+
+                <span class="node node-1"></span>
+                <span class="node node-2"></span>
+                <span class="node node-3"></span>
+                <span class="node node-4"></span>
+                <span class="node node-5"></span>
+                <span class="line line-1"></span>
+                <span class="line line-2"></span>
+                <span class="line line-3"></span>
+                <span class="line line-4"></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="proof">
+          <div class="container">
+            <div class="logo-strip" aria-label="Example customer types">
+              <div class="logo-chip">Startups</div>
+              <div class="logo-chip">Platform Teams</div>
+              <div class="logo-chip">Agencies</div>
+              <div class="logo-chip">Internal Tools</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="platform">
+          <div class="container">
+            <div class="section-heading">
+              <h2>Infrastructure that feels simpler than it is.</h2>
+              <p>
+                The best platform sites do more than look polished. They make a
+                complicated system feel organized, reliable, and ready to use.
+                Infrazz is positioned the same way.
+              </p>
+            </div>
+            <div class="stats">
+              <article class="stat-card">
+                <strong>1 repo</strong>
+                <span>to publish a branded web presence, docs, and Pages-ready deployment flow.</span>
+              </article>
+              <article class="stat-card">
+                <strong>0 guesswork</strong>
+                <span>around custom domains, DNS records, GitHub Pages routing, and HTTPS setup.</span>
+              </article>
+              <article class="stat-card">
+                <strong>24/7</strong>
+                <span>readable delivery paths so the next person can understand what ships and how.</span>
+              </article>
+              <article class="stat-card">
+                <strong>Fast setup</strong>
+                <span>for static websites that still need to feel premium, intentional, and production-ready.</span>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="products">
+          <div class="container">
+            <div class="section-heading">
+              <h2>Everything your web platform needs to start strong.</h2>
+              <p>
+                This landing page borrows the energy of modern infrastructure
+                companies: clear positioning, useful proof points, and product
+                framing that helps visitors understand value quickly.
+              </p>
+            </div>
+            <div class="feature-grid">
+              <article class="feature-card">
+                <div class="feature-icon" aria-hidden="true">01</div>
+                <h3>Delivery that stays out of the way</h3>
+                <p>
+                  Publish from GitHub, keep the workflow lightweight, and use a
+                  structure that is easy to extend into a real marketing site.
+                </p>
+              </article>
+              <article class="feature-card">
+                <div class="feature-icon" aria-hidden="true">02</div>
+                <h3>Clean domain and HTTPS setup</h3>
+                <p>
+                  Use `www.infrazz.com` as the primary address, route the apex
+                  correctly, and avoid the usual custom-domain confusion.
+                </p>
+              </article>
+              <article class="feature-card">
+                <div class="feature-icon" aria-hidden="true">03</div>
+                <h3>Room to evolve</h3>
+                <p>
+                  Start with static pages, then expand into product sections,
+                  docs, case studies, hiring pages, or status content without a redesign.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div class="pillars">
+              <article class="pillar">
+                <div class="pillar-icon" aria-hidden="true">A</div>
+                <h3>Acceleration</h3>
+                <p>
+                  Reduce setup friction so infrastructure work supports product
+                  momentum instead of slowing it down.
+                </p>
+              </article>
+              <article class="pillar">
+                <div class="pillar-icon" aria-hidden="true">B</div>
+                <h3>Reliability</h3>
+                <p>
+                  Make the path from commit to published site predictable,
+                  inspectable, and boring in the best possible way.
+                </p>
+              </article>
+              <article class="pillar">
+                <div class="pillar-icon" aria-hidden="true">C</div>
+                <h3>Clarity</h3>
+                <p>
+                  Turn hidden infrastructure knowledge into docs, structure, and
+                  conventions the next teammate can trust.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="workflow">
+          <div class="container">
+            <div class="section-heading">
+              <h2>A workflow built for teams that ship often.</h2>
+              <p>
+                The page is intentionally structured like a real infrastructure
+                company homepage: hero, proof, platform framing, solution areas,
+                and a final call to action.
+              </p>
+            </div>
+            <div class="flow-grid">
+              <article class="flow-card">
+                <span class="step">1</span>
+                <h3>Connect your domain</h3>
+                <p>
+                  Add GitHub Pages DNS records, verify the domain, set the
+                  `CNAME`, and let HTTPS provision automatically.
+                </p>
+              </article>
+              <article class="flow-card">
+                <span class="step">2</span>
+                <h3>Push to `main`</h3>
+                <p>
+                  The workflow deploys this static site through GitHub Actions so
+                  the publishing path stays versioned in the repo.
+                </p>
+              </article>
+              <article class="flow-card">
+                <span class="step">3</span>
+                <h3>Expand the site surface</h3>
+                <p>
+                  Add new sections, pages, visuals, and deeper content without
+                  having to rework the entire structure first.
+                </p>
+              </article>
+              <article class="quote-card">
+                <div class="quote-mark" aria-hidden="true">"</div>
+                <p>
+                  Strong infrastructure brands don’t just explain what they do.
+                  They make visitors feel that the system behind the product is
+                  organized, resilient, and already in motion.
+                </p>
+                <div class="quote-source">Infrazz design direction</div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="cta" id="contact">
+          <div class="container">
+            <div class="cta-panel">
+              <div class="cta-copy">
+                <h2>Ready to turn this into the real Infrazz website?</h2>
+                <p>
+                  This version is a stronger foundation than the placeholder. It
+                  is still plain HTML and CSS, so we can keep iterating quickly or
+                  split it into a fuller site structure next.
+                </p>
+              </div>
+              <div class="hero-actions">
+                <a class="button button-primary" href="mailto:hello@infrazz.com">Contact Infrazz</a>
+                <a class="button button-secondary" href="#top">Back to top</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="container footer-grid">
+          <div class="footer-links">
+            <a href="#platform">Platform</a>
+            <a href="#products">Products</a>
+            <a href="#workflow">Workflow</a>
+            <a href="/domain-setup.md">Domain setup</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
