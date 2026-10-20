@@ -53,13 +53,13 @@ Builds of `main` will fail until `relaunch` is merged, because `main` has no `wr
 ### Go-live
 
 1. Merge `relaunch` into `main` and push. Cloudflare deploys the Worker.
-   GitHub Pages also redeploys from `public/`, so the live site is correct on both until DNS moves.
+   The repo no longer deploys to GitHub Pages, so the old Pages site keeps serving the previous version until DNS moves.
 2. Worker **Settings > Domains & Routes > Add > Custom domain**: add `www.infrazz.com`, then `infrazz.com`.
    Cloudflare asks to replace the existing GitHub Pages records (4 `A` records on `@`, `CNAME www`). Accept.
    Leave the MX and TXT (email) records alone.
 3. **Rules > Redirect Rules**: redirect `infrazz.com/*` to `https://www.infrazz.com/${1}` (301, keep query string).
 4. Check: https://www.infrazz.com loads, https://infrazz.com redirects, `/check/?d=infrazz.com` runs.
-5. A week later, if all is well: turn off GitHub Pages in the repo settings and delete `.github/workflows/deploy-pages.yml`.
+5. A week later, if all is well: turn off GitHub Pages in the repo settings.
 
 ### Rollback
 
@@ -67,3 +67,4 @@ Builds of `main` will fail until `relaunch` is merged, because `main` has no `wr
 - **Hosting**: remove the two custom domains from the Worker, re-add the GitHub Pages records
   (`A @ 185.199.108.153`, `.109.153`, `.110.153`, `.111.153`, `CNAME www infrazz.github.io`, all DNS only)
   and set the custom domain back to `www.infrazz.com` in the repo's Pages settings.
+  To redeploy to Pages, restore the workflow first: `git checkout 1468381 -- .github/workflows/deploy-pages.yml .nojekyll`.
