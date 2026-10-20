@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en-SG">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Free Email Health Check: SPF, DKIM, DMARC | Infrazz</title>
+  <meta name="description" content="Check if your business email is set up to land in the inbox. Free check of your domain's MX, SPF, DKIM and DMARC records, with plain-English fixes.">
+  <link rel="canonical" href="https://www.infrazz.com/check/">
+  <meta property="og:title" content="Free Email Health Check">
+  <meta property="og:description" content="Find out if your business emails land in spam, and what to fix.">
+  <meta property="og:url" content="https://www.infrazz.com/check/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-head">
+    <div class="wrap">
+      <a class="brand" href="/" aria-label="Infrazz home">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#13233f"/><rect x="7" y="21" width="18" height="5" rx="1.5" fill="#ffd23f"/><circle cx="16" cy="8.5" r="2.3" fill="#f7f8f5"/><rect x="14" y="12" width="4" height="10" rx="1.2" fill="#f7f8f5"/></svg>
+        Infrazz
+      </a>
+      <nav class="head-links" aria-label="Main">
+        <a class="hide-sm" href="/#packages">Prices</a>
+        <a class="btn btn-sm" data-wa="Hi Infrazz, I have a question about my business email." href="mailto:hello@infrazz.com"><span data-label>Chat with us</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="check-hero">
+      <div class="wrap">
+        <h1>Is your business email landing in spam?</h1>
+        <p class="lede">Enter your domain and we'll check the four settings Gmail and Outlook look at before trusting your mail. Takes a few seconds.</p>
+        <form class="check-form" id="check-form" novalidate>
+          <label class="visually-hidden" for="domain">Your domain or email address</label>
+          <input id="domain" name="d" type="text" inputmode="url" placeholder="yourbusiness.com.sg" autocomplete="url" spellcheck="false" autocapitalize="off">
+          <button class="btn" type="submit">Check my domain</button>
+        </form>
+        <p class="error" id="check-error" role="alert"></p>
+        <p class="fine">Runs in your browser using public DNS records. We don't store the domain you check.</p>
+      </div>
+    </section>
+
+    <section class="results" id="results" hidden aria-live="polite">
+      <div class="wrap">
+        <div class="summary">
+          <h2 id="result-domain"></h2>
+          <p id="verdict"></p>
+        </div>
+        <ol class="checks">
+          <li class="chk" id="chk-mx"></li>
+          <li class="chk" id="chk-spf"></li>
+          <li class="chk" id="chk-dkim"></li>
+          <li class="chk" id="chk-dmarc"></li>
+        </ol>
+        <div class="next" id="next" hidden>
+          <div>
+            <h3 id="next-title"></h3>
+            <p id="next-text"></p>
+          </div>
+          <a class="btn btn-mark" id="next-btn" href="/#packages"><span id="next-btn-label">See packages</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <div class="wrap">
+      <span>&copy; 2026 Infrazz, Singapore</span>
+      <nav aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/#packages">Prices</a>
+        <a href="mailto:hello@infrazz.com">hello@infrazz.com</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+  <script src="/assets/check.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+// Cloudflare Workers config for www.infrazz.com (static site, no Worker script).
+// Only the ./public folder is published.
+{
+  "name": "infrazz-web",
+  "compatibility_date": "2026-10-20",
+  "workers_dev": true,
+  "preview_urls": true,
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "404-page"
+  }
+}
