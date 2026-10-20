@@ -1,12 +1,8 @@
-// Cloudflare Workers config for www.infrazz.com (static site, no Worker script).
-// Only the ./public folder is published.
+// Cloudflare Pages config for www.infrazz.com (static site, no Functions).
+// Only the ./public folder is published. Pages serves public/404.html for unknown paths
+// and applies public/_headers.
 {
   "name": "infrazz-web",
   "compatibility_date": "2026-10-20",
-  "workers_dev": true,
-  "preview_urls": true,
-  "assets": {
-    "directory": "./public",
-    "not_found_handling": "404-page"
-  }
+  "pages_build_output_dir": "./public"
 }

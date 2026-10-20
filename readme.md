@@ -14,7 +14,8 @@ public/
   assets/check.js     Health Check logic (runs in the visitor's browser)
   _headers            security headers (Cloudflare)
   robots.txt, sitemap.xml, favicon.svg
-wrangler.jsonc        Cloudflare Workers config (static assets from ./public)
+wrangler.jsonc        Cloudflare Pages config (publishes ./public)
+.github/workflows/deploy.yml   CI/CD: checks, then deploys to Cloudflare Pages
 ```
 
 ## Things to fill in
@@ -35,36 +36,40 @@ python -m http.server 8000
 ```
 Open http://localhost:8000. The Health Check needs internet access (it calls Google and Cloudflare public DNS).
 
-## Hosting: Cloudflare Workers
+## Hosting: Cloudflare Pages
 
-### One-time setup (about 5 minutes)
+GitHub Actions (`.github/workflows/deploy.yml`) deploys the site:
 
-1. Push this branch: `git push -u origin relaunch`.
-2. In the Cloudflare dashboard: **Workers & Pages > Create > Import a repository** and pick `infrazz/webui`.
-   - Production branch: `main`
-   - Build command: leave empty
-   - Deploy command: `npx wrangler deploy`
-3. In the Worker's **Settings > Build**, turn on **builds for non-production branches**
-   (deploy command `npx wrangler versions upload`). Each push to `relaunch` then gets its own preview URL on workers.dev.
-   Open that URL on your phone to review before go-live.
+- **Every pull request**: checks run, then a preview is deployed and its `*.pages.dev` URL is posted on the PR.
+- **Every push to `main`**: checks run, then the site is deployed to production (`infrazz-web.pages.dev`, plus custom domains once added).
+- **Manual**: Actions > Deploy to Cloudflare Pages > Run workflow.
 
-Builds of `main` will fail until `relaunch` is merged, because `main` has no `wrangler.jsonc` yet. That's expected and harmless.
+The checks run `wrangler pages project validate` and confirm every local link and asset in the HTML exists.
+The first deploy creates the `infrazz-web` Pages project if it doesn't exist.
+
+### One-time setup
+
+1. In Cloudflare: **My Profile > API Tokens > Create Token > Custom token**, with permission
+   **Account > Cloudflare Pages > Edit** on the Infrazz account. Copy the token.
+2. Copy the **Account ID** from the right-hand side of any zone's Overview page in the Cloudflare dashboard.
+3. In GitHub: **infrazz/webui > Settings > Secrets and variables > Actions > New repository secret**:
+   `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
+4. **Actions > Deploy to Cloudflare Pages > Run workflow** on `main`. Check the site on `https://infrazz-web.pages.dev`.
 
 ### Go-live
 
-1. Merge `relaunch` into `main` and push. Cloudflare deploys the Worker.
-   The repo no longer deploys to GitHub Pages, so the old Pages site keeps serving the previous version until DNS moves.
-2. Worker **Settings > Domains & Routes > Add > Custom domain**: add `www.infrazz.com`, then `infrazz.com`.
+1. Pages project **infrazz-web > Custom domains > Set up a custom domain**: add `www.infrazz.com`, then `infrazz.com`.
    Cloudflare asks to replace the existing GitHub Pages records (4 `A` records on `@`, `CNAME www`). Accept.
    Leave the MX and TXT (email) records alone.
-3. **Rules > Redirect Rules**: redirect `infrazz.com/*` to `https://www.infrazz.com/${1}` (301, keep query string).
-4. Check: https://www.infrazz.com loads, https://infrazz.com redirects, `/check/?d=infrazz.com` runs.
-5. A week later, if all is well: turn off GitHub Pages in the repo settings.
+2. **Rules > Redirect Rules**: redirect `infrazz.com/*` to `https://www.infrazz.com/${1}` (301, keep query string).
+3. Check: https://www.infrazz.com loads, https://infrazz.com redirects, `/check/?d=infrazz.com` runs.
+4. A week later, if all is well: turn off GitHub Pages in the repo settings.
 
 ### Rollback
 
-- **Site content**: `git revert` the merge on `main` (old site is tagged `v0-placeholder`) and push.
-- **Hosting**: remove the two custom domains from the Worker, re-add the GitHub Pages records
+- **Site content**: in the Pages project, open **Deployments**, pick the last good one and choose **Rollback to this deployment**.
+  Or `git revert` the bad commit on `main` and push. (The old placeholder site is tagged `v0-placeholder`.)
+- **Hosting**: remove the two custom domains from the Pages project, re-add the GitHub Pages records
   (`A @ 185.199.108.153`, `.109.153`, `.110.153`, `.111.153`, `CNAME www infrazz.github.io`, all DNS only)
   and set the custom domain back to `www.infrazz.com` in the repo's Pages settings.
-  To redeploy to Pages, restore the workflow first: `git checkout 1468381 -- .github/workflows/deploy-pages.yml .nojekyll`.
+  To redeploy to GitHub Pages, restore the old workflow first: `git checkout 1468381 -- .github/workflows/deploy-pages.yml .nojekyll`.
