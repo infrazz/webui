@@ -218,7 +218,7 @@
       els.nextBtnLabel.textContent = 'Fix this for me';
     } else {
       els.nextTitle.textContent = 'Looking good. What\'s next?';
-      els.nextText.textContent = 'Next step for most small teams: two-step sign-in, a password manager and backups. Our Secure Team package covers all three.';
+      els.nextText.textContent = 'Next step for most small businesses: two-step sign-in, a password manager and backups. Our Secure Team package covers all three.';
       els.nextBtn.href = '/#packages';
       els.nextBtnLabel.textContent = 'See packages';
     }

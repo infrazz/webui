@@ -78,7 +78,8 @@ p { margin: 0; }
 /* ---------- hero ---------- */
 .hero { padding-block: clamp(40px, 7vw, 88px) clamp(48px, 7vw, 96px); }
 .hero .wrap { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
-.hero h1 { max-width: 11em; }
+.eyebrow { margin-bottom: 14px; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); }
+.hero h1 { max-width: 12em; }
 .hero .lede { margin-top: 20px; }
 .hero .actions { margin-top: 28px; }
 .hero-note { margin-top: 16px; font-size: 0.92rem; color: var(--ink-soft); }
