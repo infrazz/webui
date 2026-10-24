@@ -88,6 +88,33 @@ window.INFRAZZ = {
     render(true);
   }
 
+  // Pricing tabs. Without JS the tab bar stays hidden and every panel shows in turn.
+  var tablist = document.querySelector('.tabs[role="tablist"]');
+  if (tablist) {
+    var tabs = [].slice.call(tablist.querySelectorAll('[role="tab"]'));
+    var select = function (tab, focus) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      });
+      if (focus) tab.focus();
+    };
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { select(t, false); });
+      t.addEventListener('keydown', function (e) {
+        var j = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : null;
+        if (j === null) return;
+        e.preventDefault();
+        select(tabs[(j + tabs.length) % tabs.length], true);
+      });
+    });
+    tablist.hidden = false;
+    document.documentElement.classList.add('js-tabs');
+    select(tabs[0], false);
+  }
+
   // Health Check shortcut forms: send the domain to /check/
   document.querySelectorAll('form[data-check-shortcut]').forEach(function (f) {
     f.addEventListener('submit', function (e) {
