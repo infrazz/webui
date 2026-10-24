@@ -13,7 +13,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css">
   <script type="application/ld+json">
   {
@@ -84,100 +84,174 @@
       </div>
     </section>
 
-    <section class="band" id="packages" aria-labelledby="packages-title">
+    <section class="band pricing" id="packages" aria-labelledby="packages-title">
       <div class="wrap">
-        <div class="band-head">
-          <h2 id="packages-title">Fixed prices. Three packages.</h2>
-          <p>A one-off fee to set everything up. Add a Care Plan if you'd like us to look after it afterwards.</p>
-        </div>
-        <!-- PRICES: proposed, not final. Change the amounts in the three plans, the add-ons and the Care Plans once decided. -->
-        <ul class="plans">
-          <li class="plan">
-            <h3>Starter</h3>
-            <p class="plan-for">Professional email on your own domain</p>
-            <p class="plan-amt">S$290</p>
-            <p class="plan-note">One-off, for up to 5 people</p>
-            <a class="btn plan-btn" data-wa="Hi Infrazz, I'm interested in the Starter package." href="mailto:hello@infrazz.com">Choose Starter</a>
-            <ul class="ticks">
-              <li>Domain registered or moved</li>
-              <li>Google Workspace or Microsoft 365</li>
-              <li>Spam protection set up properly (SPF, DKIM, DMARC)</li>
-              <li>Your old emails moved over</li>
-              <li>30-minute handover call</li>
-            </ul>
-          </li>
-          <li class="plan plan-pick">
-            <h3>Business <span class="tag">Recommended</span></h3>
-            <p class="plan-for">Online, taking payments, easy to reach</p>
-            <p class="plan-amt">S$1,290</p>
-            <p class="plan-note">One-off, for up to 5 people</p>
-            <a class="btn plan-btn" data-wa="Hi Infrazz, I'm interested in the Business package." href="mailto:hello@infrazz.com">Choose Business</a>
-            <p class="ticks-head">Everything in Starter, plus:</p>
-            <ul class="ticks">
-              <li>3 to 5 page website and Google Business Profile</li>
-              <li>Card and PayNow payments with Stripe</li>
-              <li>WhatsApp Business on a company number your team shares</li>
-            </ul>
-          </li>
-          <li class="plan">
-            <h3>Secure Team</h3>
-            <p class="plan-for">Everything locked down for a growing team</p>
-            <p class="plan-amt">S$2,290</p>
-            <p class="plan-note">One-off, for up to 10 people and 10 laptops</p>
-            <a class="btn plan-btn" data-wa="Hi Infrazz, I'm interested in the Secure Team package." href="mailto:hello@infrazz.com">Choose Secure Team</a>
-            <p class="ticks-head">Everything in Business, plus:</p>
-            <ul class="ticks">
-              <li>Two-step sign-in and a shared password manager</li>
-              <li>Shared folders with the right permissions, and backups</li>
-              <li>Laptops managed, encrypted and remotely wipeable</li>
-              <li>Gemini or Copilot set up with your data protected</li>
-            </ul>
-          </li>
-        </ul>
+        <h2 id="packages-title">Pricing</h2>
+        <p class="pricing-sub">Fixed prices. Every account stays in your name.</p>
 
-        <details class="compare-plans">
-          <summary>Compare all features</summary>
-          <div class="table-scroll">
-            <table>
-              <thead>
-                <tr><th scope="col"><span class="visually-hidden">Feature</span></th><th scope="col">Starter</th><th scope="col">Business</th><th scope="col">Secure Team</th></tr>
-              </thead>
-              <tbody>
-                <tr><th scope="row">People included</th><td>5</td><td>5</td><td>10</td></tr>
-                <tr><th scope="row">Domain and business email</th><td class="y">Yes</td><td class="y">Yes</td><td class="y">Yes</td></tr>
-                <tr><th scope="row">Spam protection (SPF, DKIM, DMARC)</th><td class="y">Yes</td><td class="y">Yes</td><td class="y">Yes</td></tr>
-                <tr><th scope="row">Old emails moved over</th><td class="y">Yes</td><td class="y">Yes</td><td class="y">Yes</td></tr>
-                <tr><th scope="row">Website and Google Business Profile</th><td class="n">No</td><td class="y">Yes</td><td class="y">Yes</td></tr>
-                <tr><th scope="row">Card and PayNow payments (Stripe)</th><td class="n">No</td><td class="y">Yes</td><td class="y">Yes</td></tr>
-                <tr><th scope="row">WhatsApp Business on a company number</th><td class="n">No</td><td class="y">Yes</td><td class="y">Yes</td></tr>
-                <tr><th scope="row">Two-step sign-in and password manager</th><td class="n">No</td><td class="n">No</td><td class="y">Yes</td></tr>
-                <tr><th scope="row">Shared folders and backups</th><td class="n">No</td><td class="n">No</td><td class="y">Yes</td></tr>
-                <tr><th scope="row">Laptops managed</th><td class="n">No</td><td class="n">No</td><td>Up to 10</td></tr>
-                <tr><th scope="row">AI tools set up safely</th><td class="n">No</td><td class="n">No</td><td class="y">Yes</td></tr>
-                <tr><th scope="row">Handover call and one-page guide</th><td class="y">Yes</td><td class="y">Yes</td><td class="y">Yes</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </details>
-
-        <div class="after">
-          <div>
-            <h3>Care Plan</h3>
-            <p class="plan-amt">S$49<small> a month</small></p>
-            <p>Adding and removing staff, domain and DNS changes, renewals tracked, and help whenever something stops working.</p>
-          </div>
-          <div>
-            <h3>Care Plan Plus</h3>
-            <p class="plan-amt">S$15<small> per person a month</small></p>
-            <p>Everything in Care Plan, plus laptops kept updated, staff joining and leaving handled end to end, and a monthly security check.</p>
-          </div>
-          <div>
-            <h3>Add-ons</h3>
-            <p>Cyber Essentials Ready, to prepare for CSA's mark: S$990. Extra people S$30 each, extra laptops S$60 each.</p>
-            <p>Only need one piece, like payments or a website? Ask us for a fixed quote.</p>
-          </div>
+        <div class="tabs" role="tablist" aria-label="Pricing" hidden>
+          <button type="button" role="tab" id="tab-setup" aria-controls="panel-setup" aria-selected="true">Packages</button>
+          <button type="button" role="tab" id="tab-care" aria-controls="panel-care" aria-selected="false" tabindex="-1">Care Plans</button>
+          <button type="button" role="tab" id="tab-addons" aria-controls="panel-addons" aria-selected="false" tabindex="-1">Add-ons</button>
         </div>
-        <p class="price-note">Care Plans need no contract; stop anytime. Google, Microsoft, Stripe and domain fees are billed to you directly by them, so you always own your accounts. Our prices cover our work only.</p>
+
+        <!-- PRICES: proposed, not final. Change the amounts in the cards below once decided. -->
+        <div class="tab-panel" id="panel-setup" role="tabpanel" aria-labelledby="tab-setup">
+          <h3 class="panel-title">Packages</h3>
+          <ul class="plans">
+            <li class="plan">
+              <svg class="plan-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="13" r="4"/><path d="M24 19v14"/><rect x="10" y="35" width="28" height="6" rx="2"/></svg>
+              <h4>Starter</h4>
+              <p class="plan-for">Professional email on your own domain</p>
+              <p class="plan-amt">S$290</p>
+              <p class="plan-note">One-off, for up to 5 people</p>
+              <a class="btn plan-btn" data-wa="Hi Infrazz, I'm interested in the Starter package." href="mailto:hello@infrazz.com">Choose Starter</a>
+              <ul class="ticks">
+                <li>Domain registered or moved</li>
+                <li>Google Workspace or Microsoft 365</li>
+                <li>Spam protection set up properly (SPF, DKIM, DMARC)</li>
+                <li>Your old emails moved over</li>
+                <li>30-minute handover call</li>
+              </ul>
+            </li>
+            <li class="plan">
+              <svg class="plan-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="17" cy="13" r="4"/><path d="M17 19v14"/><circle cx="31" cy="13" r="4"/><path d="M31 19v14"/><rect x="8" y="35" width="32" height="6" rx="2"/></svg>
+              <h4>Business <span class="tag">Recommended</span></h4>
+              <p class="plan-for">Online, taking payments, easy to reach</p>
+              <p class="plan-amt">S$1,290</p>
+              <p class="plan-note">One-off, for up to 5 people</p>
+              <a class="btn plan-btn" data-wa="Hi Infrazz, I'm interested in the Business package." href="mailto:hello@infrazz.com">Choose Business</a>
+              <p class="ticks-head">Everything in Starter, plus:</p>
+              <ul class="ticks">
+                <li>3 to 5 page website and Google Business Profile</li>
+                <li>Card and PayNow payments with Stripe</li>
+                <li>WhatsApp Business on a company number your team shares</li>
+              </ul>
+            </li>
+            <li class="plan">
+              <svg class="plan-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="12" cy="15" r="3.5"/><path d="M12 20.5V33"/><circle cx="24" cy="10" r="4"/><path d="M24 16v17"/><circle cx="36" cy="15" r="3.5"/><path d="M36 20.5V33"/><rect x="5" y="35" width="38" height="6" rx="2"/></svg>
+              <h4>Secure Team</h4>
+              <p class="plan-for">Everything locked down for a growing team</p>
+              <p class="plan-amt">S$2,290</p>
+              <p class="plan-note">One-off, for up to 10 people and 10 laptops</p>
+              <a class="btn plan-btn" data-wa="Hi Infrazz, I'm interested in the Secure Team package." href="mailto:hello@infrazz.com">Choose Secure Team</a>
+              <p class="ticks-head">Everything in Business, plus:</p>
+              <ul class="ticks">
+                <li>Two-step sign-in and a shared password manager</li>
+                <li>Shared folders with the right permissions, and backups</li>
+                <li>Laptops managed, encrypted and remotely wipeable</li>
+                <li>Gemini or Copilot set up with your data protected</li>
+              </ul>
+            </li>
+          </ul>
+
+          <details class="compare-plans">
+            <summary>Compare all features</summary>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr><th scope="col"><span class="visually-hidden">Feature</span></th><th scope="col">Starter</th><th scope="col">Business</th><th scope="col">Secure Team</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">People included</th><td>5</td><td>5</td><td>10</td></tr>
+                  <tr><th scope="row">Domain and business email</th><td class="y">Yes</td><td class="y">Yes</td><td class="y">Yes</td></tr>
+                  <tr><th scope="row">Spam protection (SPF, DKIM, DMARC)</th><td class="y">Yes</td><td class="y">Yes</td><td class="y">Yes</td></tr>
+                  <tr><th scope="row">Old emails moved over</th><td class="y">Yes</td><td class="y">Yes</td><td class="y">Yes</td></tr>
+                  <tr><th scope="row">Website and Google Business Profile</th><td class="n">No</td><td class="y">Yes</td><td class="y">Yes</td></tr>
+                  <tr><th scope="row">Card and PayNow payments (Stripe)</th><td class="n">No</td><td class="y">Yes</td><td class="y">Yes</td></tr>
+                  <tr><th scope="row">WhatsApp Business on a company number</th><td class="n">No</td><td class="y">Yes</td><td class="y">Yes</td></tr>
+                  <tr><th scope="row">Two-step sign-in and password manager</th><td class="n">No</td><td class="n">No</td><td class="y">Yes</td></tr>
+                  <tr><th scope="row">Shared folders and backups</th><td class="n">No</td><td class="n">No</td><td class="y">Yes</td></tr>
+                  <tr><th scope="row">Laptops managed</th><td class="n">No</td><td class="n">No</td><td>Up to 10</td></tr>
+                  <tr><th scope="row">AI tools set up safely</th><td class="n">No</td><td class="n">No</td><td class="y">Yes</td></tr>
+                  <tr><th scope="row">Handover call and one-page guide</th><td class="y">Yes</td><td class="y">Yes</td><td class="y">Yes</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </details>
+  
+        </div>
+
+        <div class="tab-panel" id="panel-care" role="tabpanel" aria-labelledby="tab-care">
+          <h3 class="panel-title">Care Plans</h3>
+          <ul class="plans plans-2">
+            <li class="plan">
+              <svg class="plan-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M38 24a14 14 0 1 1-4.1-9.9"/><path d="M34 6v8h-8"/><path d="M18 24l4 4 8-8"/></svg>
+              <h4>Care Plan</h4>
+              <p class="plan-for">Someone to call when things break</p>
+              <p class="plan-amt">S$49</p>
+              <p class="plan-note">Per month, for the whole business. No contract.</p>
+              <a class="btn plan-btn" data-wa="Hi Infrazz, I'm interested in the Care Plan." href="mailto:hello@infrazz.com">Choose Care Plan</a>
+              <ul class="ticks">
+                <li>Adding and removing staff accounts</li>
+                <li>Domain and DNS changes</li>
+                <li>Renewals tracked so nothing lapses</li>
+                <li>Help whenever email or the website stops working</li>
+              </ul>
+            </li>
+            <li class="plan">
+              <svg class="plan-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 5l15 6v11c0 10-6.5 17-15 21-8.5-4-15-11-15-21V11z"/><path d="M17 24l5 5 9-9"/></svg>
+              <h4>Care Plan Plus</h4>
+              <p class="plan-for">For teams with laptops to look after</p>
+              <p class="plan-amt">S$15</p>
+              <p class="plan-note">Per person per month. No contract.</p>
+              <a class="btn plan-btn" data-wa="Hi Infrazz, I'm interested in Care Plan Plus." href="mailto:hello@infrazz.com">Choose Care Plan Plus</a>
+              <p class="ticks-head">Everything in Care Plan, plus:</p>
+              <ul class="ticks">
+                <li>Laptops managed and kept updated</li>
+                <li>Staff joining and leaving handled end to end</li>
+                <li>Monthly check of security alerts and backups</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="tab-panel" id="panel-addons" role="tabpanel" aria-labelledby="tab-addons">
+          <h3 class="panel-title">Add-ons</h3>
+          <ul class="plans">
+            <li class="plan">
+              <svg class="plan-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="20" r="13"/><path d="M18 20l4.5 4.5L31 16"/><path d="M17 31l-3 12 10-5 10 5-3-12"/></svg>
+              <h4>Cyber Essentials</h4>
+              <p class="plan-for">Get ready for CSA's Cyber Essentials mark</p>
+              <p class="plan-amt">S$990</p>
+              <p class="plan-note">One-off</p>
+              <a class="btn plan-btn" data-wa="Hi Infrazz, I'm interested in Cyber Essentials Ready." href="mailto:hello@infrazz.com">Choose Cyber Essentials</a>
+              <ul class="ticks">
+                <li>Check of where you stand against CSA's requirements</li>
+                <li>Gaps fixed for you</li>
+                <li>Evidence prepared for the assessment</li>
+                <li>Handover to a CSA-appointed certification body</li>
+              </ul>
+            </li>
+            <li class="plan">
+              <svg class="plan-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="20" cy="15" r="6"/><path d="M8 40c0-7 5.4-12 12-12s12 5 12 12"/><path d="M37 17v12M31 23h12"/></svg>
+              <h4>Extra people</h4>
+              <p class="plan-for">More people or laptops than your package covers</p>
+              <p class="plan-amt">From S$30</p>
+              <p class="plan-note">S$30 per extra person, S$60 per extra laptop</p>
+              <a class="btn plan-btn" data-wa="Hi Infrazz, I'd like to add people or laptops." href="mailto:hello@infrazz.com">Add people or laptops</a>
+              <ul class="ticks">
+                <li>Email account, folders and access set up</li>
+                <li>Laptop enrolled, encrypted and updating itself</li>
+              </ul>
+            </li>
+            <li class="plan">
+              <svg class="plan-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 10h32v22H22l-9 7v-7H8z"/><path d="M16 19h16M16 25h10"/></svg>
+              <h4>Just one piece</h4>
+              <p class="plan-for">Payments only, website only, or something else</p>
+              <p class="plan-amt">Fixed quote</p>
+              <p class="plan-note">Tell us what you need; we reply with a price</p>
+              <a class="btn plan-btn" data-wa="Hi Infrazz, I'd like a quote for:" href="mailto:hello@infrazz.com">Ask for a quote</a>
+              <ul class="ticks">
+                <li>Stripe payments on your existing website</li>
+                <li>A website on its own</li>
+                <li>Moving from another email provider</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <p class="price-note">Google, Microsoft, Stripe and domain fees are billed to you directly by them, so you always own your accounts. Our prices cover our work only.</p>
       </div>
     </section>
 
