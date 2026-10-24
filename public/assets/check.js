@@ -212,13 +212,13 @@
     var issues = fails.concat(warns);
     if (issues.length) {
       els.nextTitle.textContent = 'Want us to fix ' + (issues.length === 1 ? 'this' : 'these') + '?';
-      els.nextText.textContent = 'Fixing ' + joinAnd(issues.map(function (x) { return x.def.title; })) + ' is part of our Email Launch package. We can usually do it without touching your website.';
+      els.nextText.textContent = 'Fixing ' + joinAnd(issues.map(function (x) { return x.def.title; })) + ' is part of our Starter package. We can usually do it without touching your website.';
       var msg = 'Hi Infrazz, I ran the Email Health Check on ' + domain + '. Issues: ' + issues.map(function (x) { return x.def.title + ' (' + WORD[x.r.status].toLowerCase() + ')'; }).join(', ') + '. Can you help fix them?';
       els.nextBtn.href = window.INFRAZZ.contactLink(msg, 'Email Health Check: ' + domain);
       els.nextBtnLabel.textContent = 'Fix this for me';
     } else {
       els.nextTitle.textContent = 'Looking good. What\'s next?';
-      els.nextText.textContent = 'Next step for most small teams: two-step sign-in, a password manager and backups. See Secure Office and our other fixed-price packages.';
+      els.nextText.textContent = 'Next step for most small teams: two-step sign-in, a password manager and backups. Our Secure Team package covers all three.';
       els.nextBtn.href = '/#packages';
       els.nextBtnLabel.textContent = 'See packages';
     }
