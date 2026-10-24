@@ -26,7 +26,8 @@ wrangler.jsonc        Cloudflare Pages config (publishes ./public)
    booking:  'https://meetings.hubspot.com/...'  // HubSpot free meetings link
    ```
    Until these are set, WhatsApp buttons become "Email us" and booking buttons are hidden.
-2. **Prices**: the four amounts in `public/index.html` (search for `PRICES:`). They are the proposed prices from the plan and still need your decision.
+2. **Prices**: the amounts in `public/index.html` (search for `PRICES:`), grouped as Get started, Run the business,
+   Stay secure and Look after it. They are proposed prices and still need your decision.
 
 ## Preview locally
 

@@ -218,7 +218,7 @@
       els.nextBtnLabel.textContent = 'Fix this for me';
     } else {
       els.nextTitle.textContent = 'Looking good. What\'s next?';
-      els.nextText.textContent = 'If you need a website or a CRM to keep track of enquiries, see our fixed-price packages.';
+      els.nextText.textContent = 'Next step for most small teams: two-step sign-in, a password manager and backups. See Secure Office and our other fixed-price packages.';
       els.nextBtn.href = '/#packages';
       els.nextBtnLabel.textContent = 'See packages';
     }
