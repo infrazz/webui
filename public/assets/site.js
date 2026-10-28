@@ -40,12 +40,13 @@ window.INFRAZZ = {
     }
   });
 
-  // Booking buttons: hidden until a booking link is set.
+  // Booking buttons: hidden in the HTML until a booking link is set.
   document.querySelectorAll('[data-booking]').forEach(function (a) {
     if (C.booking) {
       a.href = C.booking;
       a.target = '_blank';
       a.rel = 'noopener';
+      a.hidden = false;
     } else {
       a.remove();
     }

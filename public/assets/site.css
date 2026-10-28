@@ -31,6 +31,9 @@ body {
 
 img, svg { display: block; max-width: 100%; }
 
+/* hidden always wins over component display rules */
+[hidden] { display: none !important; }
+
 a { color: var(--ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
 a:hover { text-decoration-thickness: 2px; }
 
@@ -253,6 +256,7 @@ p { margin: 0; }
 .next[hidden] { display: none; }
 @media (max-width: 640px) { .next { grid-template-columns: 1fr; } }
 .error { margin-top: 16px; color: var(--fail); font-weight: 600; }
+.noscript-note { margin-top: 16px; padding: 14px 16px; background: #fbefd9; border-radius: 8px; font-weight: 600; max-width: 40em; }
 
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
