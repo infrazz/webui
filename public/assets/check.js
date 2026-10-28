@@ -5,20 +5,36 @@
   'use strict';
 
   var RESOLVERS = [
-    function (name, type) { return fetch('https://dns.google/resolve?name=' + encodeURIComponent(name) + '&type=' + type); },
-    function (name, type) { return fetch('https://cloudflare-dns.com/dns-query?name=' + encodeURIComponent(name) + '&type=' + type, { headers: { accept: 'application/dns-json' } }); }
+    function (name, type, signal) { return fetch('https://dns.google/resolve?name=' + encodeURIComponent(name) + '&type=' + type, { signal: signal }); },
+    function (name, type, signal) { return fetch('https://cloudflare-dns.com/dns-query?name=' + encodeURIComponent(name) + '&type=' + type, { headers: { accept: 'application/dns-json' }, signal: signal }); }
   ];
   var TYPE = { CNAME: 5, MX: 15, TXT: 16 };
+  var LOOKUP_TIMEOUT = 8000; // ms to wait for one resolver before trying the next
+  var firstResolver = 0;     // a resolver that fails is skipped for the rest of the check
 
   // ---------- DNS ----------
+  function ask(n, name, type) {
+    var ctrl = new AbortController();
+    var timer;
+    var limit = new Promise(function (_, reject) {
+      timer = setTimeout(function () { ctrl.abort(); reject(new Error('timeout')); }, LOOKUP_TIMEOUT);
+    });
+    var req = RESOLVERS[n](name, type, ctrl.signal)
+      .then(function (res) { if (!res.ok) throw new Error('http ' + res.status); return res.json(); });
+    return Promise.race([req, limit]).then(
+      function (j) { clearTimeout(timer); return j; },
+      function (e) { clearTimeout(timer); throw e; });
+  }
+
   function lookup(name, type) {
-    var i = 0;
+    var i = firstResolver;
     function attempt() {
       if (i >= RESOLVERS.length) return Promise.reject(new Error('dns-unreachable'));
-      var r = RESOLVERS[i++];
-      return r(name, type)
-        .then(function (res) { if (!res.ok) throw new Error('http ' + res.status); return res.json(); })
-        .catch(function () { return attempt(); });
+      var n = i++;
+      return ask(n, name, type).catch(function () {
+        if (firstResolver === n) firstResolver = n + 1;
+        return attempt();
+      });
     }
     return attempt().then(function (j) {
       var answers = (j.Answer || []).filter(function (a) { return a.type === TYPE[type] || a.type === TYPE.CNAME; });
@@ -178,6 +194,7 @@
     els.next.hidden = true;
     CHECKS.forEach(function (c) { renderCheck(c, null); });
     els.button.disabled = true;
+    firstResolver = 0;
 
     var results = {};
     checkMx(domain).then(function (mx) {
@@ -197,7 +214,7 @@
       if (res) summarise(domain, res);
     }).catch(function () {
       els.results.hidden = true;
-      els.error.textContent = 'We couldn\'t reach the DNS lookup service. Check your internet connection and try again.';
+      els.error.textContent = 'The check didn\'t finish: the DNS lookup services didn\'t answer in time. Check your internet connection and try again.';
     }).then(function () { els.button.disabled = false; });
   }
 

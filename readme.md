@@ -73,4 +73,5 @@ The first deploy creates the `infrazz-web` Pages project if it doesn't exist.
 - **Hosting**: remove the two custom domains from the Pages project, re-add the GitHub Pages records
   (`A @ 185.199.108.153`, `.109.153`, `.110.153`, `.111.153`, `CNAME www infrazz.github.io`, all DNS only)
   and set the custom domain back to `www.infrazz.com` in the repo's Pages settings.
-  To redeploy to GitHub Pages, restore the old workflow first: `git checkout 1468381 -- .github/workflows/deploy-pages.yml .nojekyll`.
+  To redeploy to GitHub Pages, restore the old workflow first: `git checkout 103fcf9^ -- .github/workflows/deploy-pages.yml .nojekyll`,
+  then change `path: .` to `path: ./public` in that workflow so only the site folder is published.
