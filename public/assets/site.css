@@ -250,6 +250,7 @@ p { margin: 0; }
 @media (max-width: 560px) { .chk { grid-template-columns: 1fr; } }
 .next { margin-top: 8px; padding: clamp(20px, 3vw, 32px); background: #fff; border: 1px solid var(--rule); border-radius: var(--radius); display: grid; grid-template-columns: 1fr auto; gap: 16px 32px; align-items: center; }
 .next p { color: var(--ink-soft); margin-top: 6px; }
+.next[hidden] { display: none; }
 @media (max-width: 640px) { .next { grid-template-columns: 1fr; } }
 .error { margin-top: 16px; color: var(--fail); font-weight: 600; }
 
