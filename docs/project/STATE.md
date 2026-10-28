@@ -6,7 +6,7 @@ Spec: `docs/project/SPEC.md`
 - **Stage:** 4 of 6, Implement
 - **Phase:** 2, Launch readiness (28 Oct to 2 Nov 2026)
 - **Go-live:** Tue 3 Nov 2026
-- **Updated:** 2026-10-28 by Claude (chat)
+- **Updated:** 2026-10-28 by Claude Code
 
 This file is the record while the hub is out of reach (Claude Code can't write to the hub). Tick tasks here with the commit hash; the next Claude session with hub access copies the state across.
 
@@ -15,16 +15,16 @@ This file is the record while the hub is out of reach (Claude Code can't write t
 - [x] T1.1 New home page, packages and prices (`00379b4`, PRs #1, #3, #4)
 - [x] T1.2 Email Health Check at /check/ (`103fcf9`, PR #1)
 - [x] T1.3 Cloudflare Pages hosting with PR previews (`201f182`, PR #2)
-- [ ] T1.4 Tabbed pricing and SEO hero, branch `claude-style-pricing` (`12cf04c`), PR to open (finding 1)
+- [x] T1.4 Tabbed pricing and SEO hero, branch `claude-style-pricing` (`12cf04c`), PR #5 open (finding 1)
 
 ## Phase 2: Launch readiness
 
 | Task | Owner | Status | Commit / note |
 |---|---|---|---|
 | T2.1 WhatsApp number and booking link in site.js and HTML | Owner sends, Claude Code inserts | To do | |
-| T2.2 Open PR for `claude-style-pricing`; owner merges after preview | Claude Code, then owner | To do | |
+| T2.2 Open PR for `claude-style-pricing`; owner merges after preview | Claude Code, then owner | PR open, owner to merge | PR #5 (open since 24 Oct); preview https://claude-style-pricing.infrazz-web.pages.dev |
 | T2.3 Claim wording (claims-check.md C1, C3, C5, C6) | Claude Code | Research done 28 Oct | wording change to do |
-| T2.4 Check Actions runs and infrazz-web.pages.dev | Claude Code | To do | |
+| T2.4 Check Actions runs and infrazz-web.pages.dev | Claude Code | Done 28 Oct | All runs since 20 Oct green; both secrets masked (set) in run logs; production serves PR #4 content |
 | T2.5 DMARC record in Cloudflare | Owner | To do | |
 | T2.6 Delete remote branches `relaunch`, `cloudflare-pages` | Claude Code | To do | approved (2A) |
 | T2.7 Wiki: commit checklists, PR `relaunch` into `main` | Claude Code | To do | |
