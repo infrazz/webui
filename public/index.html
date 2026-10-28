@@ -38,7 +38,11 @@
         { "@type": "Offer", "name": "Starter", "description": "Domain, business email on Microsoft 365 or Google Workspace, SPF, DKIM and DMARC, email migration", "price": "290", "priceCurrency": "SGD" },
         { "@type": "Offer", "name": "Business", "description": "Starter plus website, Google Business Profile, Stripe card and PayNow payments, WhatsApp Business", "price": "1290", "priceCurrency": "SGD" },
         { "@type": "Offer", "name": "Secure Team", "description": "Business plus two-step sign-in, password manager, backups, managed laptops (needs Microsoft 365 Business Premium, or Google Workspace with Windows device management) and Gemini or Copilot set up so business data isn't used to train AI and stays within existing file permissions", "price": "2290", "priceCurrency": "SGD" },
-        { "@type": "Offer", "name": "Care Plan", "description": "Monthly IT support: staff accounts, DNS changes, renewals and help when things stop working", "price": "49", "priceCurrency": "SGD" }
+        { "@type": "Offer", "name": "Care Plan", "description": "Monthly IT support for the whole business: staff accounts, DNS changes, renewals and help when things stop working", "price": "49", "priceCurrency": "SGD", "priceSpecification": { "@type": "UnitPriceSpecification", "price": "49", "priceCurrency": "SGD", "unitText": "per month" } },
+        { "@type": "Offer", "name": "Care Plan Plus", "description": "Care Plan plus managed laptops, staff joining and leaving, and a monthly security and backup check", "price": "15", "priceCurrency": "SGD", "priceSpecification": { "@type": "UnitPriceSpecification", "price": "15", "priceCurrency": "SGD", "unitText": "per person per month" } },
+        { "@type": "Offer", "name": "Cyber Essentials Ready", "description": "Preparation for CSA's Cyber Essentials mark, then handover to a CSA-appointed certification body", "price": "990", "priceCurrency": "SGD" },
+        { "@type": "Offer", "name": "Extra person", "description": "Each person beyond the package limit", "price": "30", "priceCurrency": "SGD" },
+        { "@type": "Offer", "name": "Extra laptop", "description": "Each laptop beyond the package limit", "price": "60", "priceCurrency": "SGD" }
       ]
     }
   }
@@ -173,6 +177,7 @@
                   <tr><th scope="col"><span class="visually-hidden">Feature</span></th><th scope="col">Starter</th><th scope="col">Business</th><th scope="col">Secure Team</th></tr>
                 </thead>
                 <tbody>
+                  <tr class="price-row"><th scope="row">Price (one-off)</th><td>S$290</td><td>S$1,290</td><td>S$2,290</td></tr>
                   <tr><th scope="row">People included</th><td>5</td><td>5</td><td>10</td></tr>
                   <tr><th scope="row">Domain and business email</th><td class="y">Yes</td><td class="y">Yes</td><td class="y">Yes</td></tr>
                   <tr><th scope="row">Spam protection (SPF, DKIM, DMARC)</th><td class="y">Yes</td><td class="y">Yes</td><td class="y">Yes</td></tr>

@@ -167,6 +167,7 @@ p { margin: 0; }
 .compare-plans table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
 .compare-plans th, .compare-plans td { padding: 12px 10px; border-bottom: 1px solid var(--rule); text-align: center; }
 .compare-plans thead th { font-weight: 800; }
+.compare-plans .price-row td { font-weight: 700; }
 .compare-plans tbody th { text-align: left; font-weight: 500; padding-left: 0; }
 .compare-plans td.y, .compare-plans td.n { font-size: 0; }
 .compare-plans td.y::before { content: ""; display: inline-block; width: 6px; height: 11px; border: solid var(--ink); border-width: 0 1.6px 1.6px 0; transform: rotate(45deg); }
