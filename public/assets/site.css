@@ -85,6 +85,8 @@ p { margin: 0; }
 .hero h1 { max-width: 12em; }
 .hero .lede { margin-top: 20px; }
 .hero .actions { margin-top: 28px; }
+.reply-note { margin-top: 12px; font-size: 0.92rem; font-weight: 600; color: var(--ink); }
+.hero .reply-note { margin-top: 14px; }
 .hero-note { margin-top: 16px; font-size: 0.92rem; color: var(--ink-soft); }
 @media (max-width: 880px) { .hero .wrap { grid-template-columns: 1fr; } }
 
@@ -253,6 +255,7 @@ p { margin: 0; }
 @media (max-width: 560px) { .chk { grid-template-columns: 1fr; } }
 .next { margin-top: 8px; padding: clamp(20px, 3vw, 32px); background: #fff; border: 1px solid var(--rule); border-radius: var(--radius); display: grid; grid-template-columns: 1fr auto; gap: 16px 32px; align-items: center; }
 .next p { color: var(--ink-soft); margin-top: 6px; }
+.next .reply-note { color: var(--ink); margin-top: 10px; }
 .next[hidden] { display: none; }
 @media (max-width: 640px) { .next { grid-template-columns: 1fr; } }
 .error { margin-top: 16px; color: var(--fail); font-weight: 600; }
