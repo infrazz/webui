@@ -37,3 +37,4 @@ This file is the record while the hub is out of reach (Claude Code can't write t
 ## Log
 
 - 2026-10-28: Plan v3 signed off on the hub. Claims checked and delivery checklists written (Claude, chat). Phase 2 handed to Claude Code.
+- 2026-10-28: Claude Code: T2.3, T2.9 to T2.12 done on `launch-readiness`, plus `bedf4f4` (A8: price row in the comparison table, all D3 prices in JSON-LD). Mocked-DNS Playwright suite at 390px and 1280px: 49 of 49 checks pass. T2.1 waits for the WhatsApp number and booking link.
