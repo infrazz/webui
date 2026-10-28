@@ -30,7 +30,7 @@ This file is the record while the hub is out of reach (Claude Code can't write t
 | T2.7 Wiki: commit checklists, PR `relaunch` into `main` | Claude Code | To do | |
 | T2.8 Delivery checklist per package | Claude (chat) | Done 28 Oct | wiki `Delivery/package-checklists.md`, uncommitted |
 | T2.9 Health Check: hide empty box, lookup timeouts (finding 8) | Claude Code | Done 28 Oct | `0802b0e`; mocked tests: both resolvers hung ends in 16 s, one hung finishes in 8 s |
-| T2.10 No-JavaScript fixes (finding 9) | Claude Code | To do | |
+| T2.10 No-JavaScript fixes (finding 9) | Claude Code | Done 28 Oct | `3bc73c7` |
 | T2.11 44px tap targets (finding 10) | Claude Code | To do | |
 | T2.12 "We reply within 1 working day" (finding 11) | Claude Code | To do | |
 
