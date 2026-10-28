@@ -26,7 +26,7 @@ This file is the record while the hub is out of reach (Claude Code can't write t
 | T2.3 Claim wording (claims-check.md C1, C3, C5, C6) | Claude Code | Done 28 Oct | `6b399e3` |
 | T2.4 Check Actions runs and infrazz-web.pages.dev | Claude Code | Done 28 Oct | All runs since 20 Oct green; both secrets masked (set) in run logs; production serves PR #4 content |
 | T2.5 DMARC record in Cloudflare | Owner | To do | |
-| T2.6 Delete remote branches `relaunch`, `cloudflare-pages` | Claude Code | To do | approved (2A) |
+| T2.6 Delete remote branches `relaunch`, `cloudflare-pages` | Claude Code | Done 28 Oct | Deleted on GitHub; content matched squash merges #1 and #2. Readme rollback repointed first (`1c47cf7`). Local branches kept |
 | T2.7 Wiki: commit checklists, PR `relaunch` into `main` | Claude Code | To do | |
 | T2.8 Delivery checklist per package | Claude (chat) | Done 28 Oct | wiki `Delivery/package-checklists.md`, uncommitted |
 | T2.9 Health Check: hide empty box, lookup timeouts (finding 8) | Claude Code | Done 28 Oct | `0802b0e`; mocked tests: both resolvers hung ends in 16 s, one hung finishes in 8 s |
