@@ -23,7 +23,7 @@ This file is the record while the hub is out of reach (Claude Code can't write t
 |---|---|---|---|
 | T2.1 WhatsApp number and booking link in site.js and HTML | Owner sends, Claude Code inserts | To do | |
 | T2.2 Open PR for `claude-style-pricing`; owner merges after preview | Claude Code, then owner | PR open, owner to merge | PR #5 (open since 24 Oct); preview https://claude-style-pricing.infrazz-web.pages.dev |
-| T2.3 Claim wording (claims-check.md C1, C3, C5, C6) | Claude Code | Research done 28 Oct | wording change to do |
+| T2.3 Claim wording (claims-check.md C1, C3, C5, C6) | Claude Code | Done 28 Oct | `6b399e3` |
 | T2.4 Check Actions runs and infrazz-web.pages.dev | Claude Code | Done 28 Oct | All runs since 20 Oct green; both secrets masked (set) in run logs; production serves PR #4 content |
 | T2.5 DMARC record in Cloudflare | Owner | To do | |
 | T2.6 Delete remote branches `relaunch`, `cloudflare-pages` | Claude Code | To do | approved (2A) |
