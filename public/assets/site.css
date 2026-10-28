@@ -264,3 +264,10 @@ p { margin: 0; }
   .new-addr.sweep span { animation: none; }
 }
 #nf-actions { margin-top: 28px; }
+
+/* tap targets: at least 44px tall on phones */
+@media (max-width: 640px) {
+  .brand, .btn-sm, .tabs button { min-height: 44px; }
+  .site-foot nav a { display: inline-flex; align-items: center; min-height: 44px; }
+  .site-foot nav { gap: 0 20px; }
+}
